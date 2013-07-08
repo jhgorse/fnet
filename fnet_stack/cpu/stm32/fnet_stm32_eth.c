@@ -269,6 +269,7 @@ void fnet_stm32_eth_output(	fnet_netif_t *netif, unsigned short type,
        fnet_eth_header_t *ethHeader = (fnet_eth_header_t *)td.physdesc->tdes2;
 
        fnet_memcpy (ethHeader->destination_addr, dest_addr, sizeof(fnet_mac_addr_t));
+       fnet_memcpy (ethHeader->destination_addr, &dest_addr, sizeof(fnet_mac_addr_t));
 
        fnet_stm32_get_hw_addr(netif, ethHeader->source_addr);
 
