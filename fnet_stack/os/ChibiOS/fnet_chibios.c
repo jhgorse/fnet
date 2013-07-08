@@ -40,6 +40,7 @@
 ***************************************************************************/ 
 
 #include "fnet.h"
+#include "fnet_timer_prv.h"
 #include "ch.h"
 #include "hal.h"
 
@@ -97,36 +98,6 @@ void fnet_os_isr(void)
   /*******************************
    * OS-specific Interrupt Enter.
    *******************************/
-  CH_IRQ_PROLOGUE();
-  //chSysLockFromIsr();
-
-//brtos stuff...
-//  OS_SAVE_ISR();
-//  OS_INT_ENTER();
-
-  /* brtos: Call original CPU handler*/
-  //fnet_cpu_isr();
-  
-  // TODO: Open ?
-  // CH_IRQ_HANDLER(irq_handler) {
-  // serve_interrupt(); ?
-  
-  /* Index the interrupt vector from the ICSR via CMSIS NVIC. 
-  ICSR: Interrupt Control and State Register 
-  http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.dui0553a/Cihfaaha.html */
-  fnet_uint16 vector_number = (fnet_uint16) (ICSR_VECTACTIVE_MASK & SCB_ICSR);
-  fnet_isr_handler(vector_number);
-
-
-  /*******************************
-   * Interrupt Exit.
-   *******************************/
-  //chSysUnlockFromIsr();
-  CH_IRQ_EPILOGUE();
-
-//brtos stuff...
-//  OS_INT_EXIT();  
-//  OS_RESTORE_ISR();
 }
 
 #endif
@@ -206,8 +177,9 @@ static void gpt_fnet_cb(GPTDriver *gptp) {
 /*
  * GPT2 configuration.
  */
+#define TIMER_CLOCK_HZ  100000  /* 100kHz timer clock.*/
 static const GPTConfig gpt_fnet_cfg = {
-  100000,         /* 100kHz timer clock.*/
+  TIMER_CLOCK_HZ,
   gpt_fnet_cb     /* Timer callback.*/
 };
 
@@ -219,7 +191,8 @@ static const GPTConfig gpt_fnet_cfg = {
 int fnet_os_timer_init( unsigned int period_ms )
 {
    gptStart(&FNET_CHIBIOS_TIMER, &gpt_fnet_cfg);
-   gptStartContinuous(&FNET_CHIBIOS_TIMER, 100); /* 1ms tick */
+   gptStartContinuous(&FNET_CHIBIOS_TIMER, TIMER_CLOCK_HZ/1000*period_ms); /* 100ms tick see fnet_timer.h*/
+   return 0; // TODO: what does this return?
 }
 
 /************************************************************************
