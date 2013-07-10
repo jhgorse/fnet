@@ -1,6 +1,6 @@
 /**************************************************************************
-*
-* Copyright 2012-2013 by Andrey Butok, Jon Elliott. FNET Community.
+* 
+* Copyright 2009 by Andrey Butok. Freescale Semiconductor, Inc. 
 *
 ***************************************************************************
 * This program is free software: you can redistribute it and/or modify
@@ -30,10 +30,13 @@
 *
 **********************************************************************/ /*!
 *
-* @file fnet_chibios_config.h
+* @file fnet_stm32f1_config.h
 *
-* @brief Default ChibiOS-specific configuration. @n
-* Experental. Not supported.
+* @date Mar-25-2013
+*
+* @version 0.1.5.0
+*
+* @brief STM32F4 specific configuration file.
 *
 ***************************************************************************/
 
@@ -41,30 +44,42 @@
  * !!!DO NOT MODIFY THIS FILE!!!
  ************************************************************************/
 
-#ifndef _FNET_CHIBIOS_CONFIG_H_
+#ifndef _FNET_STM32F4_CONFIG_H_
+#define _FNET_STM32F4_CONFIG_H_
 
-#define _FNET_CHIBIOS_CONFIG_H_
+#define FNET_STM32                          (1)
 
-/* @addtogroup fnet_os_config  */
-/* @{ */
-
-#ifndef FNET_CFG_OS_ISR
-    #define FNET_CFG_OS_ISR     (0)
+/* Size of the internal static heap buffer. */
+#ifndef FNET_CFG_HEAP_SIZE
+#define FNET_CFG_HEAP_SIZE                  (30 * 1024)
 #endif
 
-#ifndef FNET_CFG_OS_TIMER
-    #define FNET_CFG_OS_TIMER   (1)
-    #define FNET_CHIBIOS_TIMER  GPTD5
+/* System frequency in Hz. */
+#ifndef FNET_CFG_CPU_CLOCK_HZ
+#define FNET_CFG_CPU_CLOCK_HZ               (72000000)
 #endif
 
-#ifndef FNET_CFG_OS_MUTEX
-    #define FNET_CFG_OS_MUTEX   (1)
+/* The platform does not have second Ethernet Module.*/
+#define FNET_CFG_CPU_ETH1                   (0)
+
+/* Defines the maximum number of incoming frames that may 
+ *           be buffered by the Ethernet module.*/
+#ifndef FNET_CFG_CPU_ETH_RX_BUFS_MAX
+#define FNET_CFG_CPU_ETH_RX_BUFS_MAX        (4)
 #endif
 
-#ifndef FNET_CFG_OS_EVENT
-    #define FNET_CFG_OS_EVENT   (1)
+/* The platform has Kinetis Flash Memory Module (FTFL).*/
+#define FNET_CFG_CPU_FLASH                  (1)
+
+/*/ Smallest logical block which can be erased independently.*/
+#define FNET_CFG_CPU_FLASH_PAGE_SIZE        (4*1024)        /* 4KB sector.*/ // Not sure
+
+/* On-chip Flash size.*/
+#define FNET_CFG_CPU_FLASH_SIZE             (256 * 1024)    /* 256 KB */
+
+#define FNET_CFG_CPU_FLASH_PROGRAM_SIZE     (8) /*Bytes.*/ // Not sure
+
+/* SRAM size.*/
+#define FNET_CFG_CPU_SRAM_SIZE              (64 * 1024)    /* 64 KB */  
+
 #endif
-
-/* @} */
-
-#endif /* _FNET_CHIBIOS_CONFIG_H_ */

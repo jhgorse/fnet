@@ -64,7 +64,7 @@
  *  Reduced Media Independent Interface (RMII) support.
  ******************************************************************************/
 #ifndef FNET_CFG_CPU_ETH_RMII
-//    #define FNET_CFG_CPU_ETH_RMII        			(1)
+    #define FNET_CFG_CPU_ETH_RMII        			(0)
 #endif 
 
 /**************************************************************************
@@ -80,48 +80,12 @@
 #define  FNET_CFG_CPU_TIMER_NUMBER_MAX              (3)
 
 
-/******************************************************************************
- *  Vector number of the timer interrupt.
- *  NOTE: User application should not change this parameter. 
- ******************************************************************************/
-#ifndef FNET_CFG_CPU_TIMER_VECTOR_NUMBER
-//    #define FNET_CFG_CPU_TIMER_VECTOR_NUMBER        (84  + FNET_CFG_CPU_TIMER_NUMBER)
-#endif
-
-/******************************************************************************
- *  Vector number of the Ethernet Receive Frame vector number.
- *  NOTE: User application should not change this parameter. 
- ******************************************************************************/
-#ifndef FNET_CFG_CPU_ETH0_VECTOR_NUMBER
-//    #define FNET_CFG_CPU_ETH0_VECTOR_NUMBER        (93)
-#endif
-
 /*****************************************************************************
  *  Byte order is little endian. 
  ******************************************************************************/ 
 #undef FNET_CFG_CPU_LITTLE_ENDIAN
 #define FNET_CFG_CPU_LITTLE_ENDIAN                  (1)
 
-/*****************************************************************************
- *  On-chip Flash memory start address. 
- ******************************************************************************/ 
-#ifndef FNET_CFG_CPU_FLASH_ADDRESS 
-//    #define FNET_CFG_CPU_FLASH_ADDRESS              (0x0)
-#endif 
-
-/*****************************************************************************
- *   On-chip SRAM memory start address. 
- ******************************************************************************/ 
-#if FNET_CFG_CPU_SRAM_SIZE
-#ifndef FNET_CFG_CPU_SRAM_ADDRESS 
-//    #define FNET_CFG_CPU_SRAM_ADDRESS   ((unsigned long)(0x20000000 - (FNET_CFG_CPU_SRAM_SIZE/2))) /* SRAM_L = [0x2000_0000–(SRAM_size/2)]*/
-#endif
-#endif
-
-
-#ifndef FNET_CFG_CPU_FLASH_PROGRAM_SIZE
-//    #define FNET_CFG_CPU_FLASH_PROGRAM_SIZE         (4)
-#endif 
 
 #endif /* FNET_MK */
 

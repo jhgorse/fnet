@@ -208,7 +208,16 @@
     #define FNET_CPU_STR    "MPC56xBC"
 #endif
 
-#if FNET_CFG_CPU_STM32F4 /* Bolero3M */
+#if FNET_CFG_CPU_STM32F1 /* STM32F1 */
+    #ifdef FNET_CPU_STR
+        #error "More than one CPU selected FNET_CPU_XXXX"
+    #endif
+
+    #include "fnet_stm32f1_config.h"
+    #define FNET_CPU_STR    "STM32F1"
+#endif
+
+#if FNET_CFG_CPU_STM32F4 /* STM32F4 */
     #ifdef FNET_CPU_STR
         #error "More than one CPU selected FNET_CPU_XXXX"
     #endif
