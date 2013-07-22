@@ -48,4 +48,5 @@ int fnet_cpu_isr_install(unsigned int vector_number, unsigned int priority)
   return FNET_OK;
 }
 #endif
+void fnet_cpu_reset(void){}
 #endif /*FNET_STM32*/
