@@ -155,7 +155,7 @@ static char fapp_http_post_buffer[FAPP_HTTP_POST_BUFFER_SIZE+1/* For zero-termin
 *
 * DESCRIPTION:
 *************************************************************************/
-static unsigned long fapp_http_string_buffer_respond(char * buffer, unsigned long buffer_size, char * eof, long *cookie)
+unsigned long fapp_http_string_buffer_respond(char * buffer, unsigned long buffer_size, char * eof, long *cookie)
 {
     unsigned long result = 0;
    
@@ -192,7 +192,7 @@ static unsigned long fapp_http_string_buffer_respond(char * buffer, unsigned lon
 * DESCRIPTION:
 *************************************************************************/
 #if FNET_CFG_HTTP_SSI
-static int fapp_http_ssi_echo_handle(char * query, long *cookie)
+int fapp_http_ssi_echo_handle(char * query, long *cookie)
 {
     int result = FNET_OK;
     const struct fapp_http_echo_variable *  echo_var_ptr;
@@ -276,7 +276,7 @@ static int fapp_http_ssi_echo_handle(char * query, long *cookie)
 *
 * DESCRIPTION:
 *************************************************************************/
-static int fapp_http_cgi_stdata_handle(char * query, long *cookie)
+int fapp_http_cgi_stdata_handle(char * query, long *cookie)
 {
     unsigned long time, t_hour, t_min, t_sec;
 	struct fnet_netif_statistics statistics;
@@ -320,7 +320,7 @@ static unsigned int fapp_http_cgi_rand(void)
 *
 * DESCRIPTION:
 *************************************************************************/
-static int fapp_http_cgi_graph_handle(char * query, long *cookie)
+int fapp_http_cgi_graph_handle(char * query, long *cookie)
 {
     int q1= (int)fapp_http_cgi_rand();
     int q2= (int)fapp_http_cgi_rand();
@@ -346,7 +346,7 @@ static int fapp_http_cgi_graph_handle(char * query, long *cookie)
 *
 * DESCRIPTION:
 *************************************************************************/
-static int fapp_http_cgi_post_handle(char * query, long *cookie)
+int fapp_http_cgi_post_handle(char * query, long *cookie)
 {
     FNET_COMP_UNUSED_ARG(query);
 
@@ -365,7 +365,7 @@ static int fapp_http_cgi_post_handle(char * query, long *cookie)
 *
 * DESCRIPTION:
 *************************************************************************/
-static int fapp_http_post_receive (char *buffer, unsigned long buffer_size, long *cookie)
+int fapp_http_post_receive (char *buffer, unsigned long buffer_size, long *cookie)
 {
     long post_buffer_index = *cookie;
     long post_buffer_free_size = FAPP_HTTP_POST_BUFFER_SIZE - post_buffer_index;
