@@ -4,61 +4,47 @@ ifeq ($(FNET_STACK),)
 	FNET_STACK = ../ext/fnet/fnet_stack
 endif
 
-#			$(FNET_STACK)/cpu/stm32/fnet_stm32_mac.c \
-
-FNETSRC +=		$(FNET_STACK)/cpu/fnet_cpu.c \
-			$(FNET_STACK)/cpu/common/fnet_fec.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_cache.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_eth.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_flash.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_isr_inst.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_serial.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_stdlib.c \
-			$(FNET_STACK)/cpu/mcf/fnet_mcf_timer.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_cache.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_eth.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_flash.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_isr.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_isr_inst.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_serial.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_stdlib.c \
-			$(FNET_STACK)/cpu/mk/fnet_mk_timer.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_cache.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_eth.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_isr.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_isr_inst.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_serial.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_stdlib.c \
-			$(FNET_STACK)/cpu/mpc/fnet_mpc_timer.c \
-                        $(FNET_STACK)/cpu/stm32/fnet_stm32.c \
-			$(FNET_STACK)/cpu/stm32/fnet_stm32_eth.c \
-			$(FNET_STACK)/cpu/stm32/fnet_stm32_serial.c \
-			$(FNET_STACK)/os/ChibiOS/fnet_chibios.c \
-			$(FNET_STACK)/os/brtos/fnet_brtos.c \
-			$(FNET_STACK)/os/freertos/fnet_freertos.c \
-			$(FNET_STACK)/os/ucosIII/fnet_ucosIII.c \
-			$(FNET_STACK)/services/dhcp/fnet_dhcp.c \
-			$(FNET_STACK)/services/dns/fnet_dns.c \
-			$(FNET_STACK)/services/flash/fnet_flash.c \
-			$(FNET_STACK)/services/fs/fnet_fs.c \
-			$(FNET_STACK)/services/fs/fnet_fs_rom.c \
-			$(FNET_STACK)/services/fs/fnet_fs_root.c \
-			$(FNET_STACK)/services/http/fnet_http.c \
+FAPPSRC = 		$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_dhcp.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_dns.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_fs.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_fs_image.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_fs_image_http09.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_telnet.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_tftp.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_http.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_ping.c 
+			
+HTTPSRC =		$(FNET_STACK)/services/http/fnet_http.c \
 			$(FNET_STACK)/services/http/fnet_http_auth.c \
 			$(FNET_STACK)/services/http/fnet_http_cgi.c \
 			$(FNET_STACK)/services/http/fnet_http_get.c \
 			$(FNET_STACK)/services/http/fnet_http_post.c \
 			$(FNET_STACK)/services/http/fnet_http_ssi.c \
+
+OPTSRC =		$(FNET_STACK)/services/flash/fnet_flash.c \
+			$(FNET_STACK)/services/fs/fnet_fs.c \
+			$(FNET_STACK)/services/fs/fnet_fs_rom.c \
+			$(FNET_STACK)/services/fs/fnet_fs_root.c \
+			$(FNET_STACK)/services/tftp/fnet_tftp_cln.c \
+			$(FNET_STACK)/services/tftp/fnet_tftp_srv.c \
+
+FNETSRC +=		$(FNET_STACK)/cpu/fnet_cpu.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_bench.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_mem.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_params.c \
+			$(FNET_STACK)/../fnet_demos/common/fnet_application/fapp_setget.c \
+                        $(FNET_STACK)/cpu/stm32/fnet_stm32.c \
+			$(FNET_STACK)/cpu/stm32/fnet_stm32_eth.c \
+			$(FNET_STACK)/cpu/stm32/fnet_stm32_serial.c \
+			$(FNET_STACK)/os/ChibiOS/fnet_chibios.c \
+			$(FNET_STACK)/services/dhcp/fnet_dhcp.c \
+			$(FNET_STACK)/services/dns/fnet_dns.c \
 			$(FNET_STACK)/services/ping/fnet_ping.c \
 			$(FNET_STACK)/services/poll/fnet_poll.c \
 			$(FNET_STACK)/services/serial/fnet_serial.c \
 			$(FNET_STACK)/services/shell/fnet_shell.c \
 			$(FNET_STACK)/services/telnet/fnet_telnet.c \
-			$(FNET_STACK)/services/tftp/fnet_tftp_cln.c \
-			$(FNET_STACK)/services/tftp/fnet_tftp_srv.c \
 			$(FNET_STACK)/stack/fnet_arp.c \
 			$(FNET_STACK)/stack/fnet_checksum.c \
 			$(FNET_STACK)/stack/fnet_error.c \
@@ -82,8 +68,8 @@ FNETSRC +=		$(FNET_STACK)/cpu/fnet_cpu.c \
 			$(FNET_STACK)/stack/fnet_stdlib.c \
 			$(FNET_STACK)/stack/fnet_tcp.c \
 			$(FNET_STACK)/stack/fnet_timer.c \
-			$(FNET_STACK)/stack/fnet_udp.c \
-#			/STM32/ChibiFNET/ChibiOS/ext/fnet/fnet_demos/common/fnet_application/fapp.c
+			$(FNET_STACK)/stack/fnet_udp.c
+
 
  FNETINC += $(FNET_STACK) \
  			$(FNET_STACK)/compiler \
@@ -108,5 +94,5 @@ FNETSRC +=		$(FNET_STACK)/cpu/fnet_cpu.c \
  			$(FNET_STACK)/services/telnet \
  			$(FNET_STACK)/services/tftp \
  			$(FNET_STACK)/stack \
- #                       $(FNET_STACK)/fnet_demos/common/fnet_application 
+                        $(FNET_STACK)/../fnet_demos/common/fnet_application \
  
