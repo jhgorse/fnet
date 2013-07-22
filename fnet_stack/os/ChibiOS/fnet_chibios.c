@@ -194,7 +194,7 @@ static msg_t fnet_timer_thread(void *period_ms) {
 
    chRegSetThreadName("FNET timer thread");
 
-   evtInit(&fnetEventTimer, MS2ST(period_ms) );
+   evtInit(&fnetEventTimer, MS2ST(*(unsigned int*)(period_ms)) );
    evtStart(&fnetEventTimer);
    chEvtRegisterMask(&fnetEventTimer.et_es, &el0, PERIODIC_TIMER_ID);
    chEvtAddEvents(PERIODIC_TIMER_ID);
