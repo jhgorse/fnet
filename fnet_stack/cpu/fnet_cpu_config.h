@@ -111,6 +111,10 @@
     #define FNET_CFG_CPU_STM32F4    (0)
 #endif
 
+#ifndef FNET_CFG_CPU_STM32F1
+    #define FNET_CFG_CPU_STM32F1    (0)
+#endif
+
 /*********** MFC ********************/
 #if FNET_CFG_CPU_MCF52235 /* Kirin2 */
     #ifdef FNET_CPU_STR
@@ -208,13 +212,24 @@
     #define FNET_CPU_STR    "MPC56xBC"
 #endif
 
-#if FNET_CFG_CPU_STM32F4 /* Bolero3M */
+/*********** STM ********************/
+
+#if FNET_CFG_CPU_STM32F4 /* STM32F4 */
     #ifdef FNET_CPU_STR
         #error "More than one CPU selected FNET_CPU_XXXX"
     #endif
 
     #include "fnet_stm32f4_config.h"
     #define FNET_CPU_STR    "STM32F4"
+#endif
+
+#if FNET_CFG_CPU_STM32F1 /* STM32F1 */
+    #ifdef FNET_CPU_STR
+        #error "More than one CPU selected FNET_CPU_XXXX"
+    #endif
+
+    #include "fnet_stm32f1_config.h"
+    #define FNET_CPU_STR    "STM32F1"
 #endif
 
 /*-----------*/

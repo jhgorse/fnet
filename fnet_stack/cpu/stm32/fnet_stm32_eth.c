@@ -42,6 +42,8 @@
 *
 ***************************************************************************/
 
+#define FNET_CFG_CPU_ETH0 (1) // TODO: Remove this. inca
+
 #include "fnet_config.h"
 #if FNET_STM32 && (FNET_CFG_CPU_ETH0 ||FNET_CFG_CPU_ETH1)
 
